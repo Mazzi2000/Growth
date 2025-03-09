@@ -47,12 +47,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^bz%h!_=smr$t$#(gmd47fjdd!y9to@=5lj8@hmh3+au2-aysi'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key-for-dev')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -89,7 +89,8 @@ MIDDLEWARE = [
 ]
 
 # Configure CORS to alllow request from our Reat app
-CORS_ALLOW_ALL_ORIGINS = True # Only for development
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only True in development
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
 
 ROOT_URLCONF = 'core.urls'
 
@@ -166,3 +167,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Add to settings.py
 AUTH_USER_MODEL = 'users.User'
+
+# Add security headers
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
