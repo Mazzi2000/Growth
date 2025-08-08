@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   Button,
-  Modal,
+  Modal as ModalBS,
   ModalHeader,
   ModalBody,
   ModalFooter,
@@ -35,7 +35,7 @@ export default class CustomModal extends Component {
     const { toggle, onSave } = this.props;
 
     return (
-      <Modal isOpen={true} toggle={toggle}>
+      <ModalBS isOpen={true} toggle={toggle}>
         <ModalHeader toggle={toggle}>Todo Item</ModalHeader>
         <ModalBody>
           <Form>
@@ -82,7 +82,7 @@ export default class CustomModal extends Component {
             Save
           </Button>
         </ModalFooter>
-      </Modal>
+      </ModalBS>
     );
   }
 }

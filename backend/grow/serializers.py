@@ -4,4 +4,4 @@ from .models import Grow
 class GrowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grow
-        fields = ['id', 'name', 'description', 'completed']
+        fields = ['id', 'title', 'description', 'completed']
